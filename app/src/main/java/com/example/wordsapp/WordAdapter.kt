@@ -15,9 +15,11 @@
  */
 package com.example.wordsapp
 
+import android.content.Intent
 import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
@@ -82,6 +84,15 @@ class WordAdapter(private val letterId: String, context: Context) :
         // Set the text of the WordViewHolder
         holder.button.text = item
 
+        holder.button.setOnClickListener {
+            val queryUrl: Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}$item")
+
+            // Initialize a new intent object with ACTION_VIEW and the URI
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+
+            // Start the activity with the implicit intent
+            context.startActivity(intent)
+        }
     }
     // Setup custom accessibility delegate to set the text read with
     // an accessibility service
